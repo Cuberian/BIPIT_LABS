@@ -1,0 +1,14 @@
+C:\Users\Анастасия\source\repos\BIPIT05\BIPIT05\obj\Debug\BIPIT05.csprojAssemblyReference.cache
+C:\Users\Анастасия\source\repos\BIPIT05\BIPIT05\obj\Debug\BIPIT05.csproj.CoreCompileInputs.cache
+C:\Users\Анастасия\source\repos\BIPIT05\BIPIT05\bin\Debug\BIPIT05.dll.config
+C:\Users\Анастасия\source\repos\BIPIT05\BIPIT05\bin\Debug\BIPIT05.dll
+C:\Users\Анастасия\source\repos\BIPIT05\BIPIT05\bin\Debug\BIPIT05.pdb
+C:\Users\Анастасия\source\repos\BIPIT05\BIPIT05\obj\Debug\BIPIT05.dll
+C:\Users\Анастасия\source\repos\BIPIT05\BIPIT05\obj\Debug\BIPIT05.pdb
+C:\Users\theme\OneDrive\Рабочий стол\BIPIT05\BIPIT05\bin\Debug\BIPIT05.dll.config
+C:\Users\theme\OneDrive\Рабочий стол\BIPIT05\BIPIT05\bin\Debug\BIPIT05.dll
+C:\Users\theme\OneDrive\Рабочий стол\BIPIT05\BIPIT05\bin\Debug\BIPIT05.pdb
+C:\Users\theme\OneDrive\Рабочий стол\BIPIT05\BIPIT05\obj\Debug\BIPIT05.csprojAssemblyReference.cache
+C:\Users\theme\OneDrive\Рабочий стол\BIPIT05\BIPIT05\obj\Debug\BIPIT05.csproj.CoreCompileInputs.cache
+C:\Users\theme\OneDrive\Рабочий стол\BIPIT05\BIPIT05\obj\Debug\BIPIT05.dll
+C:\Users\theme\OneDrive\Рабочий стол\BIPIT05\BIPIT05\obj\Debug\BIPIT05.pdb
