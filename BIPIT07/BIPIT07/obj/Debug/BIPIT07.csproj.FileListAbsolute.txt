@@ -1,0 +1,6 @@
+C:\Users\theme\OneDrive\Рабочий стол\BIPIT_LABS\BIPIT07\BIPIT07\bin\Debug\BIPIT07.dll.config
+C:\Users\theme\OneDrive\Рабочий стол\BIPIT_LABS\BIPIT07\BIPIT07\bin\Debug\BIPIT07.dll
+C:\Users\theme\OneDrive\Рабочий стол\BIPIT_LABS\BIPIT07\BIPIT07\bin\Debug\BIPIT07.pdb
+C:\Users\theme\OneDrive\Рабочий стол\BIPIT_LABS\BIPIT07\BIPIT07\obj\Debug\BIPIT07.csproj.CoreCompileInputs.cache
+C:\Users\theme\OneDrive\Рабочий стол\BIPIT_LABS\BIPIT07\BIPIT07\obj\Debug\BIPIT07.dll
+C:\Users\theme\OneDrive\Рабочий стол\BIPIT_LABS\BIPIT07\BIPIT07\obj\Debug\BIPIT07.pdb

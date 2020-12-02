@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIPIT07", "BIPIT07\BIPIT07.csproj", "{F1356E4A-B59D-4480-8D97-B9C65EDDBA03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatHost", "ChatHost\ChatHost.csproj", "{F1F94F5B-2F09-4532-9B42-E8B9ADE3531F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{E153E3BC-3EEA-4F0B-90EE-097A70AB8960}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1356E4A-B59D-4480-8D97-B9C65EDDBA03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1356E4A-B59D-4480-8D97-B9C65EDDBA03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1356E4A-B59D-4480-8D97-B9C65EDDBA03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1356E4A-B59D-4480-8D97-B9C65EDDBA03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1F94F5B-2F09-4532-9B42-E8B9ADE3531F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1F94F5B-2F09-4532-9B42-E8B9ADE3531F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1F94F5B-2F09-4532-9B42-E8B9ADE3531F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1F94F5B-2F09-4532-9B42-E8B9ADE3531F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E153E3BC-3EEA-4F0B-90EE-097A70AB8960}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E153E3BC-3EEA-4F0B-90EE-097A70AB8960}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E153E3BC-3EEA-4F0B-90EE-097A70AB8960}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E153E3BC-3EEA-4F0B-90EE-097A70AB8960}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E0073A38-F8BD-4FA4-B111-320639D674AF}
+	EndGlobalSection
+EndGlobal
