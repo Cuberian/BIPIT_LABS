@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище bipitpjModelContainer" CdmEntityContainer="bipitpjEntities">
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="bipitpjModel.Clients">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="client_id" ColumnName="client_id" />
+          <ScalarProperty Name="client_fullname" ColumnName="client_fullname" />
+          <ScalarProperty Name="client_email" ColumnName="client_email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="bipitpjModel.Services">
+        <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="service_id" ColumnName="service_id" />
+          <ScalarProperty Name="service_title" ColumnName="service_title" />
+          <ScalarProperty Name="service_cost" ColumnName="service_cost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Shippings">
+      <EntityTypeMapping TypeName="bipitpjModel.Shippings">
+        <MappingFragment StoreEntitySet="Shippings">
+          <ScalarProperty Name="shipping_id" ColumnName="shipping_id" />
+          <ScalarProperty Name="client_id" ColumnName="client_id" />
+          <ScalarProperty Name="service_id" ColumnName="service_id" />
+          <ScalarProperty Name="shipping_date" ColumnName="shipping_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_3">
+      <EntityTypeMapping TypeName="bipitpjModel.View_3">
+        <MappingFragment StoreEntitySet="View_3">
+          <ScalarProperty Name="shipping_id" ColumnName="shipping_id" />
+          <ScalarProperty Name="client_id" ColumnName="client_id" />
+          <ScalarProperty Name="client_fullname" ColumnName="client_fullname" />
+          <ScalarProperty Name="service_id" ColumnName="service_id" />
+          <ScalarProperty Name="service_title" ColumnName="service_title" />
+          <ScalarProperty Name="service_cost" ColumnName="service_cost" />
+          <ScalarProperty Name="shipping_date" ColumnName="shipping_date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
