@@ -1,0 +1,20 @@
+﻿@using BIPIT09.Models
+@model List<Services>
+
+<table class="table mt-4">
+    @{
+        <thead>
+            <td>Service ID</td>
+            <td>Service title</td>
+            <td>Service cost</td>
+        </thead>
+        foreach (var item in Model)
+        {
+            <tr>
+                <td scope="col">@item.service_id</td>
+                <td scope="col">@item.service_title</td>
+                <td scope="col">@item.service_cost</td>
+            </tr>
+        }
+    }
+</table>

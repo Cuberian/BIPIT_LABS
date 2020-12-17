@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Shippings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Shippings</h2>
+
+<div class="row">
+    @Html.Action("ShippingsPartial", "Table")
+</div>

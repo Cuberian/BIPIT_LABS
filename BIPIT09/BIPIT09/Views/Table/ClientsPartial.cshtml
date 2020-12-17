@@ -1,0 +1,21 @@
+﻿@using BIPIT09.Models
+@model List<Clients>
+
+<table class="table mt-4">
+    @{
+        <thead>
+            <td>Client ID</td>
+            <td>Client Fullname</td>
+            <td>Email</td>
+        </thead>
+        foreach (var item in Model)
+        {
+            <tr>
+                <td scope="col">@item.client_id</td>
+                <td scope="col">@item.client_fullname</td>
+                <td scope="col">@item.client_email</td>
+            </tr>
+        }
+    }
+</table>
+
