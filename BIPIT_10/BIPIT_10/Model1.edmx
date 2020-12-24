@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище bipitpjModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client_fullname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="client_email" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="service_id" />
+          </Key>
+          <Property Name="service_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="service_title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="service_cost" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shippings">
+          <Key>
+            <PropertyRef Name="shipping_id" />
+          </Key>
+          <Property Name="shipping_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="service_id" Type="int" Nullable="false" />
+          <Property Name="shipping_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SomeClass1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="name" Type="text" />
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "bipitpj.dbo.View_2" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="View_2">
+          <Key>
+            <PropertyRef Name="shipping_id" />
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="client_fullname" />
+            <PropertyRef Name="service_id" />
+            <PropertyRef Name="service_title" />
+            <PropertyRef Name="service_cost" />
+            <PropertyRef Name="shipping_date" />
+          </Key>
+          <Property Name="shipping_id" Type="int" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="client_fullname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="service_id" Type="int" Nullable="false" />
+          <Property Name="service_title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="service_cost" Type="int" Nullable="false" />
+          <Property Name="shipping_date" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "bipitpj.dbo.View_3" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="View_3">
+          <Key>
+            <PropertyRef Name="shipping_id" />
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="client_fullname" />
+            <PropertyRef Name="service_id" />
+            <PropertyRef Name="service_title" />
+            <PropertyRef Name="service_cost" />
+            <PropertyRef Name="shipping_date" />
+          </Key>
+          <Property Name="shipping_id" Type="int" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="client_fullname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="service_id" Type="int" Nullable="false" />
+          <Property Name="service_title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="service_cost" Type="int" Nullable="false" />
+          <Property Name="shipping_date" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Shippings_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Shippings" Type="Self.Shippings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Shippings">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shippings_Services">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="Shippings" Type="Self.Shippings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="Shippings">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище bipitpjModelContainer">
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shippings" EntityType="Self.Shippings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SomeClass1" EntityType="Self.SomeClass1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_2" EntityType="Self.View_2" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_2].[shipping_id] AS [shipping_id], 
+    [View_2].[client_id] AS [client_id], 
+    [View_2].[client_fullname] AS [client_fullname], 
+    [View_2].[service_id] AS [service_id], 
+    [View_2].[service_title] AS [service_title], 
+    [View_2].[service_cost] AS [service_cost], 
+    [View_2].[shipping_date] AS [shipping_date]
+    FROM [dbo].[View_2] AS [View_2]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_3" EntityType="Self.View_3" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_3].[shipping_id] AS [shipping_id], 
+    [View_3].[client_id] AS [client_id], 
+    [View_3].[client_fullname] AS [client_fullname], 
+    [View_3].[service_id] AS [service_id], 
+    [View_3].[service_title] AS [service_title], 
+    [View_3].[service_cost] AS [service_cost], 
+    [View_3].[shipping_date] AS [shipping_date]
+    FROM [dbo].[View_3] AS [View_3]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Shippings_Clients" Association="Self.FK_Shippings_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Shippings" EntitySet="Shippings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shippings_Services" Association="Self.FK_Shippings_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Shippings" EntitySet="Shippings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bipitpjModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client_fullname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="client_email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Shippings" Relationship="Self.FK_Shippings_Clients" FromRole="Clients" ToRole="Shippings" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="service_id" />
+          </Key>
+          <Property Name="service_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="service_title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="service_cost" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Shippings" Relationship="Self.FK_Shippings_Services" FromRole="Services" ToRole="Shippings" />
+        </EntityType>
+        <EntityType Name="Shippings">
+          <Key>
+            <PropertyRef Name="shipping_id" />
+          </Key>
+          <Property Name="shipping_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="service_id" Type="Int32" Nullable="false" />
+          <Property Name="shipping_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Shippings_Clients" FromRole="Shippings" ToRole="Clients" />
+          <NavigationProperty Name="Services" Relationship="Self.FK_Shippings_Services" FromRole="Shippings" ToRole="Services" />
+        </EntityType>
+        <EntityType Name="SomeClass1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="View_2">
+          <Key>
+            <PropertyRef Name="shipping_id" />
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="client_fullname" />
+            <PropertyRef Name="service_id" />
+            <PropertyRef Name="service_title" />
+            <PropertyRef Name="service_cost" />
+            <PropertyRef Name="shipping_date" />
+          </Key>
+          <Property Name="shipping_id" Type="Int32" Nullable="false" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="client_fullname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="service_id" Type="Int32" Nullable="false" />
+          <Property Name="service_title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="service_cost" Type="Int32" Nullable="false" />
+          <Property Name="shipping_date" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="View_3">
+          <Key>
+            <PropertyRef Name="shipping_id" />
+            <PropertyRef Name="client_id" />
+            <PropertyRef Name="client_fullname" />
+            <PropertyRef Name="service_id" />
+            <PropertyRef Name="service_title" />
+            <PropertyRef Name="service_cost" />
+            <PropertyRef Name="shipping_date" />
+          </Key>
+          <Property Name="shipping_id" Type="Int32" Nullable="false" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="client_fullname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="service_id" Type="Int32" Nullable="false" />
+          <Property Name="service_title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="service_cost" Type="Int32" Nullable="false" />
+          <Property Name="shipping_date" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <Association Name="FK_Shippings_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Shippings" Type="Self.Shippings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Shippings">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shippings_Services">
+          <End Role="Services" Type="Self.Services" Multiplicity="1" />
+          <End Role="Shippings" Type="Self.Shippings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Services">
+              <PropertyRef Name="service_id" />
+            </Principal>
+            <Dependent Role="Shippings">
+              <PropertyRef Name="service_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bipitpjEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Services" EntityType="Self.Services" />
+          <EntitySet Name="Shippings" EntityType="Self.Shippings" />
+          <EntitySet Name="SomeClass1" EntityType="Self.SomeClass1" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="View_2" EntityType="Self.View_2" />
+          <EntitySet Name="View_3" EntityType="Self.View_3" />
+          <AssociationSet Name="FK_Shippings_Clients" Association="Self.FK_Shippings_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Shippings" EntitySet="Shippings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shippings_Services" Association="Self.FK_Shippings_Services">
+            <End Role="Services" EntitySet="Services" />
+            <End Role="Shippings" EntitySet="Shippings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище bipitpjModelContainer" CdmEntityContainer="bipitpjEntities">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="bipitpjModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="client_fullname" ColumnName="client_fullname" />
+                <ScalarProperty Name="client_email" ColumnName="client_email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="bipitpjModel.Services">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="service_title" ColumnName="service_title" />
+                <ScalarProperty Name="service_cost" ColumnName="service_cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shippings">
+            <EntityTypeMapping TypeName="bipitpjModel.Shippings">
+              <MappingFragment StoreEntitySet="Shippings">
+                <ScalarProperty Name="shipping_id" ColumnName="shipping_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="shipping_date" ColumnName="shipping_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SomeClass1">
+            <EntityTypeMapping TypeName="bipitpjModel.SomeClass1">
+              <MappingFragment StoreEntitySet="SomeClass1">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="bipitpjModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_2">
+            <EntityTypeMapping TypeName="bipitpjModel.View_2">
+              <MappingFragment StoreEntitySet="View_2">
+                <ScalarProperty Name="shipping_id" ColumnName="shipping_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="client_fullname" ColumnName="client_fullname" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="service_title" ColumnName="service_title" />
+                <ScalarProperty Name="service_cost" ColumnName="service_cost" />
+                <ScalarProperty Name="shipping_date" ColumnName="shipping_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_3">
+            <EntityTypeMapping TypeName="bipitpjModel.View_3">
+              <MappingFragment StoreEntitySet="View_3">
+                <ScalarProperty Name="shipping_id" ColumnName="shipping_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="client_fullname" ColumnName="client_fullname" />
+                <ScalarProperty Name="service_id" ColumnName="service_id" />
+                <ScalarProperty Name="service_title" ColumnName="service_title" />
+                <ScalarProperty Name="service_cost" ColumnName="service_cost" />
+                <ScalarProperty Name="shipping_date" ColumnName="shipping_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

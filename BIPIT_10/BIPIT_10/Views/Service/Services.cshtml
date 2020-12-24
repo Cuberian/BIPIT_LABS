@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BIPIT_10.Services>
+
+@{
+    ViewBag.Title = "Services";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Услуги</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("Добавить новую услугу", "Create")
+    </p>
+}
+    <table class="table">
+        <tr>
+            <th>
+                ID услуги
+            </th>
+            <th>
+                Название услуги
+            </th>
+            <th>
+                Стоимость услуги
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.service_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.service_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.service_cost)
+        </td>
+            @if (User.Identity.IsAuthenticated)
+             {
+                <td>
+                    @Html.ActionLink("Изменить", "Update", new { id = item.service_id }) |
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.service_id })
+                </td>
+             }
+            else 
+            { 
+                <td></td>
+            }
+        </tr>
+        }
+
+    </table>

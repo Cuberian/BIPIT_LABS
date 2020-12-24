@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BIPIT_10.Clients>
+
+@{
+    ViewBag.Title = "Clients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Клиенты</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("Добавить нового клиента", "Create")
+    </p>
+}
+    <table class="table">
+        <tr>
+            <th>
+                ID клиента
+            </th>
+            <th>
+                Полное имя клиента
+            </th>
+            <th>
+                Почта
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.client_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.client_fullname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.client_email)
+                </td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        @Html.ActionLink("Изменить", "Update", new { id = item.client_id }) |
+                        @Html.ActionLink("Удалить", "Delete", new { id = item.client_id })
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            </tr>
+        }
+
+    </table>

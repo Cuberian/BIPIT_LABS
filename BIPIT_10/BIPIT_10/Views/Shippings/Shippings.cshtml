@@ -1,0 +1,79 @@
+﻿@model IEnumerable<BIPIT_10.View_3>
+
+@{
+    ViewBag.Title = "Shippings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Перевозки</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("Добавить новую перевозку", "Create")
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            ID перевозки
+        </th>
+        <th>
+            ID клиента
+        </th>
+        <th>
+            Полное имя клиента
+        </th>
+        <th>
+            ID сервиса
+        </th>
+        <th>
+            Название услуги
+        </th>
+        <th>
+            Стоимость услуги
+        </th>
+        <th>
+            Дата перевозки
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.shipping_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.client_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.client_fullname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.service_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.service_title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.service_cost)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.shipping_date)
+    </td>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <td>
+            @Html.ActionLink("Изменить", "Update", new { id = item.shipping_id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id = item.shipping_id })
+        </td>
+    }
+    else
+    {
+        <td></td>
+    }
+</tr>
+    }
+
+</table>
