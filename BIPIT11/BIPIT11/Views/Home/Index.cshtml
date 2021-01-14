@@ -1,0 +1,440 @@
+﻿
+<h3>Клиенты</h3>
+<div id="tableClientBlock"></div>
+
+<div id="editClientBlock" style="display: inline-block">
+    <h3>Редактирование клиента</h3>
+    <table>
+        <tr><td><input type="hidden" id="editClientId" /></td><td></td></tr>
+        <tr><td><label>Имя: </label></td><td><input type="text" required id="editClientName" /></td></tr>
+        <tr><td><label>Email: </label></td><td><input type="email" required id="editClientEmail" /></td></tr>
+    </table>
+    <button class="btn btn-primary" id="editClient">Сохранить</button>
+    <button class="ml-2 btn btn-primary backButton" data-category="Client">Вернуться</button>
+</div>
+
+<div id="createClientBlock" style="display: inline-block">
+    <h3>Добавление клиента</h3>
+    <table>
+        <tr><td><label>Имя: </label></td><td><input type="text" id="addClientName" /></td></tr>
+        <tr><td><label>Email: </label></td><td><input type="email" id="addClientEmail" /></td></tr>
+    </table>
+    <button class="btn btn-primary" id="addClient">Добавить</button>
+</div>
+<hr />
+<h3>Услуги</h3>
+<div id="tableServiceBlock"></div>
+
+<div id="editServiceBlock" style="display: inline-block">
+    <h3>
+        Редактирование услуги
+    </h3>
+    <table>
+        <tr><td><input type="hidden" id="editServiceId" /></td></tr>
+        <tr><td><label>Название: </label></td><td><input type="text" id="editServiceTitle" /></td></tr>
+        <tr><td><label>Стоимость: </label></td><td><input type="number" id="editServiceCost" /></td></tr>
+    </table>
+    <button class="btn btn-primary" id="editService">Сохранить</button>
+    <button class="ml-2 btn btn-primary backButton" data-category="Service">Вернуться</button>
+</div>
+
+<div id="createServiceBlock" style="display: inline-block">
+    <h3>Добавление услуги</h3>
+    <table>
+        <tr><td><label>Название: </label></td><td><input type="text" id="addServiceTitle" /></td></tr>
+        <tr><td><label>Стоимость: </label></td><td><input type="number" id="addServiceCost" /></td></tr>
+    </table>
+    <button class="btn btn-primary" id="addService">Добавить</button>
+</div>
+<hr />
+<h3>Поставки</h3>
+<div id="tableShippingBlock"></div>
+<div id="editShippingBlock" style="display: inline-block">
+    <h3>
+        Редактирование услуги
+    </h3>
+    <table>
+        <tr><td><input type="hidden" id="editshippingId" /></td></tr>
+        <tr><td><label>Клиент: </label></td><td><select id="editShippingClientId"></select></td></tr>
+        <tr><td><label>Услуга: </label></td><td><select id="editShippingServiceId"></select></td></tr>
+        <tr><td><label>Дата поставки: </label></td><td><input type="date" id="editShippingDate" /></td></tr>
+    </table>
+    <button class="btn btn-primary" id="editShipping">Сохранить</button>
+    <button class="ml-2 btn btn-primary backButton" data-category="Shipping">Вернуться</button>
+</div>
+
+<div id="createShippingBlock" style="display: inline-block">
+    <h3>Добавление услуги</h3>
+    <table>
+        <tr><td><label>Клиент: </label></td><td><select id="addShippingClientId"></select></td></tr>
+        <tr><td><label>Услуга: </label></td><td><select id="addShippingServiceId"></select></td></tr>
+        <tr><td><label>Дата поставки: </label></td><td><input type="date" id="addShippingDate" /></td></tr>
+    </table>
+    <button class="btn btn-primary" id="addShipping">Добавить</button>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+    $(document).ready(function () { 
+
+        GetAllClients();
+        GetAllServices();
+        GetAllShippings();
+
+        GetSelectData(null, null, "add");
+
+        $(".backButton").on('click', function (event) {
+            event.preventDefault();
+            var category = $(this).data('category');
+            $("#create" + category + "Block").css('display', 'block');
+            $("#edit" + category + "Block").css('display', 'none');
+        });
+
+        $("#addClient").click(function (event) {
+            event.preventDefault();
+            AddItem("Clients");
+        });
+
+        $("#editClient").click(function (event) {
+            event.preventDefault();
+            UpdateItem("Clients");
+        });
+
+        $("#addService").click(function (event) {
+            event.preventDefault();
+            AddItem("Services");
+        });
+
+        $("#editService").click(function (event) {
+            event.preventDefault();
+            UpdateItem("Services");
+        });
+
+        $("#addShipping").click(function (event) {
+            event.preventDefault();
+            AddItem("Shippings");
+        });
+
+        $("#editShipping").click(function (event) {
+            event.preventDefault();
+            UpdateItem("Shippings");
+        });
+
+    });
+
+
+    function AddItem(category) {
+        var item;
+        switch (category) {
+            case "Clients":
+                item = {
+                    client_fullname: $('#addClientName').val(),
+                    client_email: $('#addClientEmail').val()
+                };
+                break;
+            case "Services":
+                item = {
+                    service_title: $('#addServiceTitle').val(),
+                    service_cost: $('#addServiceCost').val()
+                };
+                break;
+            case "Shippings":
+                item = {
+                    client_id: $('#addShippingClientId').val(),
+                    service_id: $('#addShippingServiceId').val(),
+                    shipping_date: $('#addShippingDate').val()
+                };
+                break;
+        }
+
+
+        $.ajax({
+            url: '/api/' + category,
+            type: 'POST',
+            data: JSON.stringify(item),
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                var fun = 'GetAll' + category;
+                window[fun]();
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+    }
+
+
+    function UpdateItem(category) {
+        var id;
+
+        var item;
+        switch (category) {
+            case "Clients":
+                id = $('#editClientId').val();
+
+                item = {
+                    client_id: id,
+                    client_fullname: $('#editClientName').val(),
+                    client_email: $('#editClientEmail').val()
+                };
+                break;
+            case "Services":
+                id = $('#editServiceId').val();
+                item = {
+                    service_id: id,
+                    service_title: $('#editServiceTitle').val(),
+                    service_cost: $('#editServiceCost').val()
+                };
+                break;
+            case "Shippings":
+                id = $('#editShippingId').val();
+                item = {
+                    shipping_id: id,
+                    client_id: $('#editShippingClientId').val(),
+                    service_id: $('#editShippingServiceId').val(),
+                    shipping_date: $('#editShippingDate').val()
+                };
+                break;
+        }
+
+        // получаем новые значения для редактируемой книги
+
+        $.ajax({
+            url: '/api/' + category + '/' + id,
+            type: 'PUT',
+            data: JSON.stringify(item),
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                var fun = 'GetAll' + category;
+                window[fun]();
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+    }
+
+    // Получение всех книг по ajax-запросу
+    function GetAllClients() {
+
+        $("#createClientBlock").css('display', 'block');
+        $("#editClientBlock").css('display', 'none');
+        $.ajax({
+            url: '/api/Clients',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                WriteClients(data);
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+    }
+
+
+    function GetAllServices() {
+        $("#createServiceBlock").css('display', 'block');
+        $("#editServiceBlock").css('display', 'none');
+        $.ajax({
+            url: '/api/Services',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                WriteServices(data);
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+    }
+
+    function GetAllShippings() {
+        $("#createShippingBlock").css('display', 'block');
+        $("#editShippingBlock").css('display', 'none');
+        $.ajax({
+            url: '/api/Shippings',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                WriteShippings(data);
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+    }
+
+
+    function WriteClients(clients) {
+        var strResult = "<table><th>ID</th><th>Имя</th><th>Email</th>";
+        $.each(clients, function (index, client) {
+            strResult += "<tr><td>" + client.client_id + "</td><td> " + client.client_fullname + "</td><td>" +
+                client.client_email + "</td>" +
+                "<td><a class='link' id='editItem' data-category='Clients' data-item='" + client.client_id + "' onclick='EditItem(this);' >Редактировать</a></td>" +
+                "<td><a class='link' id='delItem' data-category='Clients' data-item='" + client.client_id + "' onclick='DeleteItem(this);' >Удалить</a></td></tr>";
+        });
+        strResult += "</table>";
+        $("#tableClientBlock").html(strResult);
+
+    }
+
+    function WriteServices(services) {
+        var strResult = "<table><th>ID</th><th>Название услуги</th><th>Стоймость услуги</th>";
+        $.each(services, function (index, service) {
+            strResult += "<tr><td>" + service.service_id + "</td><td> " + service.service_title + "</td><td>" +
+                service.service_cost + "</td>" +
+                "<td><a class='link' id='editItem' data-category='Services' data-item='" + service.service_id + "' onclick='EditItem(this);' >Редактировать</a></td>" +
+                "<td><a class='link' id='delItem' data-category='Services' data-item='" + service.service_id + "' onclick='DeleteItem(this);' >Удалить</a></td></tr>";
+        });
+        strResult += "</table>";
+        $("#tableServiceBlock").html(strResult);
+
+    }
+
+
+    function GetSelectData(editClientId, editServiceId, selectType) {
+
+        var clients;
+        var services;
+        $.when(getAjaxClients(), getAjaxServices()).done(function (getClientsResult, getServicesResult) {
+            PrintSelects(getClientsResult[0], getServicesResult[0], editClientId, editServiceId, selectType) 
+        });
+
+        function getAjaxClients() {
+            return $.ajax({
+                url: '/api/Clients',
+                type: 'GET',
+                dataType: 'json'
+            });
+        }
+        function getAjaxServices() {
+            return $.ajax({
+                url: '/api/Services',
+                type: 'GET',
+                dataType: 'json'
+            });
+        }
+        
+    }
+
+    function PrintSelects(clients, services, editClientId, editServiceId, selectType) {
+        var strResult = "";
+        $.each(clients, function (index, client) {
+            if (editClientId == null || editClientId != client.client_id)
+                strResult += "<option value='" + client.client_id + "'>" + client.client_fullname + "</option>"
+            else if (editClientId != null && editClientId == client.client_id)
+                strResult += "<option value='" + client.client_id + "' selected>" + client.client_fullname + "</option>"
+        });
+        $("#" + selectType + "ShippingClientId").html(strResult);
+
+        strResult = "";
+        $.each(services, function (index, service) {
+            if (editServiceId == null || editServiceId != service.service_id)
+                strResult += "<option value='" + service.service_id + "'>" + service.service_title + "</option>"
+            else if (editServiceId != null && editServiceId == service.service_id)
+                strResult += "<option value='" + service.service_id + "' selected>" + service.service_title + "</option>"
+        });
+        $("#" + selectType + "ShippingServiceId").html(strResult);
+    }
+
+    function WriteShippings(shippings) {
+        var strResult = "<table><th>ID Перевозки</th><th>ID Клиента</th><th>Имя клиента</th><th>ID Услуги</th><th>Название услуги</th><th>Стоимость услуги</th><th>Дата перевозки</th>";
+        $.each(shippings, function (index, shipping) {
+            strResult += "<tr><td>" + shipping.shipping_id + "</td><td> " + shipping.client_id + "</td><td>" +
+                shipping.client_fullname + "</td><td>" + shipping.service_id + "</td><td>" + shipping.service_title + "</td><td>" + shipping.service_cost + "</td><td>" + shipping.shipping_date.split("T")[0] + "</td>" +
+                "<td><a class='link' id='editItem' data-category='Shippings' data-item='" + shipping.shipping_id + "' onclick='EditItem(this);' >Редактировать</a></td>" +
+                "<td><a class='link' id='delItem' data-category='Shippings' data-item='" + shipping.shipping_id + "' onclick='DeleteItem(this);' >Удалить</a></td></tr>";
+        });
+        strResult += "</table>";
+        $("#tableShippingBlock").html(strResult);
+
+    }
+
+    // обработчик удаления
+    function DeleteItem(el) {
+        // получаем id удаляемого объекта
+        var id = $(el).attr('data-item');
+        var category = $(el).data('category');
+
+        $.ajax({
+            url: '/api/' + category + '/' + id,
+            type: 'DELETE',
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                var fun = 'GetAll' + category;
+                window[fun]();
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+    }
+
+    // обработчик редактирования
+    function EditItem(el) {
+        // получаем id редактируемого объекта
+        var id = $(el).attr('data-item');
+        var category = $(el).data('category');
+
+        $.ajax({
+            url: '/api/' + category + '/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                ShowItem(data, category);
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+    }
+
+    // вывод данных редактируемой книги в поля для редактирования
+    function ShowItem(item, category) {
+        if (item != null) {
+
+            switch (category) {
+                case "Clients":
+                    $("#createClientBlock").css('display', 'none');
+                    $("#editClientBlock").css('display', 'block');
+                    $("#editClientId").val(item.client_id);
+                    $("#editClientName").val(item.client_fullname);
+                    $("#editClientEmail").val(item.client_email);
+                    break;
+                case "Services":
+                    $("#createServiceBlock").css('display', 'none');
+                    $("#editServiceBlock").css('display', 'block');
+                    $("#editServiceId").val(item.service_id);
+                    $("#editServiceTitle").val(item.service_title);
+                    $("#editServiceCost").val(item.service_cost);
+                    break;
+                case "Shippings":
+                    $("#createShippingBlock").css('display', 'none');
+                    $("#editShippingBlock").css('display', 'block');
+                    $("#editShippingId").val(item.shipping_id);
+                    $("#editShippingDate").val(item.shipping_date.split("T")[0]);
+                    GetSelectData(item.client_id, item.service_id, "edit")
+                    break;
+            }
+        }
+        else {
+            alert("Такого элемента не существует");
+        }
+    }
+    // запрос книги на редактирование
+    function GetBook(id) {
+
+        $.ajax({
+            url: '/api/Client/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                ShowBook(data);
+            },
+            error: function (x, y, z) {
+                alert(x + '\n' + y + '\n' + z);
+            }
+        });
+    }
+</script>

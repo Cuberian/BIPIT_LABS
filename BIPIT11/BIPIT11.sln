@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIPIT11", "BIPIT11\BIPIT11.csproj", "{F611B5F2-915C-441F-B354-2D386843FDCB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F611B5F2-915C-441F-B354-2D386843FDCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F611B5F2-915C-441F-B354-2D386843FDCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F611B5F2-915C-441F-B354-2D386843FDCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F611B5F2-915C-441F-B354-2D386843FDCB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F4D16AD-7DD6-4814-997F-588441BFF9C0}
+	EndGlobalSection
+EndGlobal
